@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/d1e0d0de7e.js"></script>
+    <title>To-Do App</title>
+</head>
+<body
+style="padding: 20px">
+<div class="container-fluid-bg-light">
+    <h1>To-Do App</h1>
+    <ul>
+        {% for item in all_todo_item %}
+        <li>{{ item.content }}
+            <form
+            style="display: inline;" 
+            action="/deletetodo/{{ item.id }}/" 
+            method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <i class="fa fa-trash"></i>
+                </button>
+                
+                </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="/addtodo/" method="POST">
+    {% csrf_token %}
+    <input type='text' name='content' placeholder="add a task"/>
+    <button type="submit">Add</button>
+    </form>
+</div>
+
+</body>
+</html>
